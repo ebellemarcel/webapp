@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la propriété{% endblock %}
+
+{% block body %}
+    <h1>{{ propriete.titre }}</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <td>{{ propriete.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Titre</th>
+                        <td>{{ propriete.titre }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ propriete.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix</th>
+                        <td>{{ propriete.prix }} €</td>
+                    </tr>
+					<tr>
+                        <th>Surface</th>
+                        <td>{{ propriete.surface }} m²</td>
+                    </tr>
+					<tr>
+                        <th>Nb Chambres</th>
+                        <td>{{ propriete.chambres }}</td>
+                    </tr>
+					<tr>
+                        <th>Adresse</th>
+                        <td>{{ propriete.adresse }}</td>
+                    </tr>
+					<tr>
+                        <th>Ville</th>
+                        <td>{{ propriete.ville }}</td>
+                    </tr>
+					<tr>
+                        <th>Code Postal</th>
+                        <td>{{ propriete.codepostal }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h2>Photos</h2>
+            <div class="row">
+                {% for photo in propriete.photos %}
+                    <div class="col-md-4 mb-3">
+                        <img src="{{ asset(photo.imagePath) }}" alt="Photo {{ loop.index }}" class="img-fluid">
+                    </div>
+                {% else %}
+                    <p>Aucune photo disponible pour cette propriété.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <h2>Caractéristiques</h2>
+    <ul>
+        {% for accessoire in propriete.accessoires %}
+            <li>{{ accessoire.nom }}</li>
+        {% else %}
+            <li>Aucune accessoire enregistrée pour cette propriété.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('propriete_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    <a href="{{ path('propriete_edit', {'id': property.id}) }}" class="btn btn-primary">Modifier</a>
+
+    {{ include('propriete/_delete_form.html.twig') }}
+{% endblock %}

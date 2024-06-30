@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer une Propriete{% endblock %}
+
+{% block body %}
+<form method="post" action="{{ path('user_delete', {'id': propriete.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette propriété ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ propriete.id) }}">
+    <button class="btn btn-danger">Supprimer</button>
+</form>
+{% endblock %}
