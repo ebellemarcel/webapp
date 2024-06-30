@@ -1,0 +1,12 @@
+{# templates/admin/property_form.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{% if property.id %}Edit{% else %}New{% endif %} Property{% endblock %}
+
+{% block body %}
+    <h1>{% if property.id %}Edit{% else %}New{% endif %} Property</h1>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Save</button>
+    {{ form_end(form) }}
+{% endblock %}

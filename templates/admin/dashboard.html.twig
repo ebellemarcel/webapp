@@ -1,0 +1,27 @@
+{# templates/admin/dashboard.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block body %}
+    <h1>Admin Dashboard</h1>
+    <nav>
+						<li class="nav-item">
+                            <a class="nav-link" href="{{ path('user_index') }}">Utilisateurs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('property_index') }}">Propriétés</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('feature_index') }}">Caractéristiques</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('contact_request_index') }}">Demandes de contact</a>
+                        </li>
+    </nav>
+    <section>
+        <h2>Statistics</h2>
+        <p>Total properties: {{ stats.totalProperties }}</p>
+        {# Add more stats #}
+    </section>
+{% endblock %}

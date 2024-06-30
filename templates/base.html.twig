@@ -1,0 +1,22 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="{{ path('home') }}">Home</a></li>
+                <li><a href="{{ path('property_list') }}">Properties</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('admin_dashboard') }}">Admin</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

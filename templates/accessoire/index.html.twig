@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Accessoires{% endblock %}
+
+{% block body %}
+    <h1>Liste des accessoires</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for accessoire in accessoires %}
+            <tr>
+                <td>{{ accessoire.id }}</td>
+                <td>{{ accessoire.nom }}</td>
+                <td>{{ accessoire.description }}</td>
+                <td>
+                    <a href="{{ path('accessoire_show', {'id': accessoire.id}) }}" class="btn btn-info">Voir</a>
+                    <a href="{{ path('accessoire_edit', {'id': accessoire.id}) }}" class="btn btn-primary">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun accessoire trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('accessoire_new') }}" class="btn btn-success">Créer un nouvel accessoire</a>
+{% endblock %}

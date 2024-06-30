@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demandes de Contact{% endblock %}
+
+{% block body %}
+    <h1>Demandes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Email</th>
+				<th>Message</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.nom }}</td>
+				<td>{{ contact.email }}</td>
+                <td>{{ contact.message }}</td>
+                <td>
+                    <a href="{{ path('contact_show', {'id': contact.id}) }}" class="btn btn-info">Voir</a>
+                    <a href="{{ path('contact_edit', {'id': contact.id}) }}" class="btn btn-primary">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune demande trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('contact_new') }}" class="btn btn-success">Créer une nouvelle demande</a>
+{% endblock %}

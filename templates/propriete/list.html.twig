@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des propriétés{% endblock %}
+
+{% block body %}
+    <h1>Liste des propriétés</h1>
+
+    <div class="row">
+        {% for propriete in properties %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if propriete.photos is not empty %}
+                        <img src="{{ asset(propriete.photos|first.imagePath) }}" class="card-img-top" alt="Photo principale">
+                    {% else %}
+                        <div class="card-img-top bg-secondary text-white d-flex justify-content-center align-items-center" style="height: 200px;">
+                            <span>Pas de photo</span>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ propriete.titre }}</h5>
+                        <p class="card-text">{{ propriete.description|slice(0, 100) }}...</p>
+                        <p class="card-text"><strong>Prix: </strong>{{ propriete.price }} €</p>
+                        <a href="{{ path('propriete_show', {'id': propriete.id}) }}" class="btn btn-primary">Voir détails</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p>Aucune propriété trouvée.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ path('propriete_new') }}" class="btn btn-success">Ajouter une nouvelle propriété</a>
+{% endblock %}

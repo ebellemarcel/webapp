@@ -1,0 +1,19 @@
+{# templates/propriete/detail.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ propriete.titre }}{% endblock %}
+
+{% block body %}
+    <h1>{{ propriete.titre }}</h1>
+    <div class="propriete-details">
+        <p>Type: {{ propriete.type }}</p>
+        <p>Prix: {{ propriete.prix|number_format(2, ',', ' ') }} €</p>
+        <p>Surface: {{ propriete.surface }} m²</p>
+        <p>Adresse: {{ propriete.adresse }}</p>
+		<p>Latitude: {{ propriete.latitude }}</p>
+		<p>Longitude: {{ propriete.Longitude }}</p>
+        <p>Description: {{ propriete.description|nl2br }}</p>
+    </div>
+    {# Add photo gallery here #}
+    {# Add contact form here #}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle propriété{% endblock %}
+
+{% block body %}
+    <h1>Créer une nouvelle propriété</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.titre) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.prix) }}
+        {{ form_row(form.surface) }}
+        {{ form_row(form.chambres) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.ville) }}
+        {{ form_row(form.codepostal) }}
+        {{ form_row(form.latitude) }}
+        {{ form_row(form.longitude) }}
+        
+        <h2>Photos</h2>
+        <div class="row" id="photo-fields-list"
+            data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}"
+            data-widget-tags="{{ '<div class="col-md-4 mb-3"></div>'|e }}"
+            data-widget-counter="{{ form.photos|length }}">
+            {% for photoField in form.photos %}
+                <div class="col-md-4 mb-3">
+                    {{ form_errors(photoField) }}
+                    {{ form_widget(photoField) }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" class="btn btn-info" id="add-another-photo">Ajouter une photo</button>
+
+        <h2>Caractéristiques</h2>
+        {{ form_row(form.accessoires) }}
+
+        <button class="btn btn-primary mt-3">Créer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('propriete_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        const addPhotoButton = document.getElementById('add-another-photo');
+        const photoFieldList = document.getElementById('photo-fields-list');
+
+        addPhotoButton.addEventListener('click', function() {
+            const widgetCounter = photoFieldList.dataset.widgetCounter;
+            const newWidget = photoFieldList.dataset.prototype.replace(/__name__/g, widgetCounter);
+            const newDiv = document.createElement('div');
+            newDiv.innerHTML = photoFieldList.dataset.widgetTags.replace(/__name__/g, widgetCounter);
+            newDiv.innerHTML += newWidget;
+            photoFieldList.appendChild(newDiv);
+            photoFieldList.dataset.widgetCounter = parseInt(widgetCounter) + 1;
+        });
+    </script>
+{% endblock %}
